@@ -1,0 +1,22 @@
+{
+  "name": "react-blog-app",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "antd": "^4.16.13",
+    "axios": "^0.22.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-router-dom": "^5.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.26.1",
+    "vite": "^2.6.0"
+  }
+}
