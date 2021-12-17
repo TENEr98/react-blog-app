@@ -1,19 +1,23 @@
 import { Button } from 'antd'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
-import './Navbar.css'
+import './Navbar.scss'
 
 const Navbar = () => {
   return (
-    <div className="header">
-      <h3 className="header__title">Realworld Blog</h3>
+    <header className="header">
+      <NavLink to="/" className="header__title">
+        Realworld Blog
+      </NavLink>
       <div className="header__actions">
         <NavLink to="/sign-in" component={Button}>
           Sign In
         </NavLink>
-        <Link component={Button}>Sign Up</Link>
+        <NavLink to="/sign-up" component={Button}>
+          Sign Up
+        </NavLink>
       </div>
-    </div>
+    </header>
   )
 }
 

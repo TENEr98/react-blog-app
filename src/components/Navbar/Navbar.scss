@@ -1,0 +1,36 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  padding: 1rem 1.375rem;
+  .header__title{
+    font-family: 'Inter';
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 1.125rem;
+    line-height: 28px;
+    text-decoration: none;
+  }
+  .header__actions{
+    display: flex;
+    column-gap: 1.25rem;
+    .ant-btn{
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      &:nth-child(2){
+        border-radius: 0.3125rem;
+        border: 1px solid #52C41A;
+        padding:0.625rem 1.125rem;
+        >span{
+          color:#52C41A;
+        }
+      }
+      color: rgba(0, 0, 0, 0.85);
+      
+      
+    }
+    
+  }
+}

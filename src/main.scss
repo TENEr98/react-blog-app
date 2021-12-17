@@ -107,6 +107,6 @@ code {
 
 .wrapper {
   width: 100%;
-  min-height: 100vh;
-  background: #ebeef3;
+  min-height: calc(100vh - 5rem);
+  background-color: #ebeef3;
 }

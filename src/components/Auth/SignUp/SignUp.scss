@@ -1,0 +1,18 @@
+.sign-up__container {
+  width: 100%;
+  height: 100%;
+  padding: 3.6875rem 0;
+  .sign-up__content {
+    width: 24rem;
+    height: 37.5rem;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0px 22px 106px rgba(0, 0, 0, 0.07),
+      0px 9.19107px 44.2843px rgba(0, 0, 0, 0.0503198),
+      0px 4.91399px 23.6765px rgba(0, 0, 0, 0.0417275),
+      0px 2.75474px 13.2728px rgba(0, 0, 0, 0.035),
+
+      0px 1.46302px 7.04911px rgba(0, 0, 0, 0.0282725),
+      0px 0.608796px 2.93329px rgba(0, 0, 0, 0.0196802);
+  }
+}
