@@ -1,9 +1,9 @@
-.sign-up__container {
+.sign-in__container {
   width: 100%;
   height: 100%;
   padding: 3.6875rem 0;
 
-  .sign-up__content {
+  .sign-in__content {
     width: 24rem;
     height: auto;
     margin: 0 auto;
@@ -16,27 +16,12 @@
       0px 1.46302px 7.04911px rgba(0, 0, 0, 0.0282725),
       0px 0.608796px 2.93329px rgba(0, 0, 0, 0.0196802);
 
-    .sign-up__title {
+    .sign-in__title {
       text-align: center;
       margin: 0 0 1.3125rem 0;
       font-size: 20px;
       line-height: 28px;
-    }
-
-    .ant-form-item {
-      margin-bottom: 0.75rem;
-
-      .ant-input {
-        border-radius: 0.25rem;
-      }
-    }
-
-    .ant-btn {
-      border-radius: 0.25rem;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 1rem;
-      height: 2.5rem;
+      font-weight: 500;
     }
   }
 }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'https://conduit-api-realworld.herokuapp.com/'
+  baseURL: import.meta.env.VITE_BASE_URL
 })
 
 instance.interceptors.request.use(
@@ -18,41 +18,37 @@ instance.interceptors.request.use(
     }
     return config
   },
-  (error) => {
-    Promise.reject(error)
-  }
+  (error) => Promise.reject(error)
 )
 
 instance.interceptors.response.use(
-  (response) => {
-    return response
-  },
-  function (error) {
-    const originalRequest = error.config
-
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true
-      const refreshToken = localStorage.getItem('rt')
-
-      return instance
-        .post('/v1/auth/renew', {
-          'refreshToken': refreshToken,
-          'username': 'test'
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            localStorage.setItem('t', res.data.body.token)
-            originalRequest.headers['Authorization'] =
-              'Bearer ' + res.data.body.token
-            return axios(originalRequest)
-          }
-        })
-        .catch((err) => {
-          localStorage.removeItem('t')
-          localStorage.removeItem('rt')
-          window.location.assign('/')
-        })
-    }
-    return Promise.reject(error)
-  }
+  (response) => response,
+  (error) => Promise.reject(error)
 )
+
+export const AuthAPI = {
+  getUser() {
+    return instance
+      .get('/user')
+      .then((response) => response)
+      .catch((err) => err.response)
+  },
+  signUp(user) {
+    return instance
+      .post('/users', { user })
+      .then((response) => response)
+      .catch((err) => err.response)
+  },
+  signIn(user) {
+    return instance
+      .post('/users/login', { user })
+      .then((response) => response)
+      .catch((err) => err.response)
+  },
+  editUser(user) {
+    return instance
+      .put('/user', { user })
+      .then((response) => response)
+      .catch((err) => err.response)
+  }
+}
