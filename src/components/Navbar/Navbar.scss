@@ -16,7 +16,7 @@
   .header__actions {
     display: flex;
     align-items: center;
-    column-gap: 1.25rem;
+    column-gap: 1.6875rem;
 
     .header__action {
       display: flex;
@@ -27,13 +27,23 @@
       padding: 0.625rem 1.125rem !important;
       vertical-align: middle;
 
-      &:nth-child(2) {
+      &.green {
         border-radius: 0.3125rem;
         border: 1px solid #52c41a;
-
-        > span {
-          color: #52c41a;
-        }
+        color: #52c41a;
+      }
+      &.grey {
+        border-radius: 0.3125rem;
+        border: 1px solid rgba(0, 0, 0, 0.75);
+        color: rgba(0, 0, 0, 0.75);
+      }
+    }
+    .header__avatar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .header__img {
+        margin-left: 0.8125rem;
       }
     }
   }

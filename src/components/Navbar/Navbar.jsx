@@ -2,15 +2,33 @@ import { useEffect, useState } from 'react'
 
 import { Button } from 'antd'
 import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+import userPhotoPlaceholder from '../../assets/img/userPhotoPlaceholder.png'
+import { onChangeLocalStorage } from '../../store/authSlice'
 
 import './Navbar.scss'
 
 const Navbar = () => {
-  const [isAuth, setIsAuth] = useState(false)
+  const dispatch = useDispatch()
+  const { username, isAuth } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    !localStorage.getItem('t') ? setIsAuth(false) : setIsAuth(true)
-  }, [localStorage.getItem('t')])
+    if (localStorage.getItem('user'))
+      dispatch(
+        onChangeLocalStorage({
+          username: localStorage.getItem('user'),
+          isAuth: true
+        })
+      )
+    return () => {}
+  }, [])
+
+  const onClickLogOut = () => {
+    localStorage.removeItem('user')
+    localStorage.removeItem('t')
+    dispatch(onChangeLocalStorage({ username: '', isAuth: false }))
+  }
 
   return (
     <header className="header">
@@ -20,11 +38,28 @@ const Navbar = () => {
       <div className="header__actions">
         {isAuth ? (
           <>
-            <NavLink to="/new-article" component={Button}>
+            <NavLink
+              to="/new-article"
+              className="header__action green"
+              component={Button}
+            >
               Create article
             </NavLink>
-            <NavLink to="/edit-profile" component={Button}>
-              {localStorage.getItem('username')}
+            <div className="header__avatar">
+              <NavLink to="/edit-profile" component={Button}>
+                {username}
+              </NavLink>
+              <div className="header__img">
+                <img src={userPhotoPlaceholder} />
+              </div>
+            </div>
+            <NavLink
+              to="/"
+              className="header__action grey"
+              component={Button}
+              onClick={onClickLogOut}
+            >
+              Log Out
             </NavLink>
           </>
         ) : (
@@ -39,7 +74,7 @@ const Navbar = () => {
             <NavLink
               to="/sign-up"
               component={Button}
-              className="header__action"
+              className="header__action green"
             >
               Sign Up
             </NavLink>

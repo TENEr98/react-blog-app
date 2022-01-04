@@ -1,0 +1,41 @@
+.profile {
+  width: 100%;
+  height: 100%;
+  padding: 3.75rem 0;
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__content {
+    width: 24rem;
+    height: auto;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 3rem 2.25rem;
+  }
+  &__title {
+    text-align: center;
+    font-style: normal;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .ant-form-item {
+    margin-bottom: 0.75rem;
+
+    .ant-input {
+      border-radius: 0.25rem;
+    }
+  }
+  .ant-row:last-child {
+    margin-top: 1.3125rem;
+    margin-bottom: 0;
+  }
+  .ant-btn {
+    border-radius: 0.25rem;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+    height: 2.5rem;
+  }
+}

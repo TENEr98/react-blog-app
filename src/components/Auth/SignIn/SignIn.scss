@@ -23,5 +23,21 @@
       line-height: 28px;
       font-weight: 500;
     }
+
+    .ant-form-item {
+      margin-bottom: 0.75rem;
+
+      .ant-input {
+        border-radius: 0.25rem;
+      }
+    }
+
+    .ant-btn {
+      border-radius: 0.25rem;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1rem;
+      height: 2.5rem;
+    }
   }
 }
