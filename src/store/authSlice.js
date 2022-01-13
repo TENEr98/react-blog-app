@@ -105,7 +105,6 @@ const authSlice = createSlice({
       state.loading = false
       state.response = payload
       state.username = payload?.data?.user?.username
-      console.log(payload.status)
       if (payload.status === 200) {
         console.log({ AUTH: state.isAuth })
         state.isAuth = true
@@ -152,4 +151,5 @@ export const {
   onChangeLocalStorage,
   onChangeEditProfile
 } = authSlice.actions
+
 export default authSlice.reducer

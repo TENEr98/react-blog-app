@@ -52,3 +52,12 @@ export const AuthAPI = {
       .catch((err) => err.response)
   }
 }
+
+export const ArticleAPI = {
+  getArticle(limit, offset) {
+    return instance
+      .get(`/articles?limit=${limit}&offset=${offset}`)
+      .then((response) => response)
+      .catch((err) => err.response)
+  }
+}
