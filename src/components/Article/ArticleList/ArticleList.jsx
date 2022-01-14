@@ -13,16 +13,17 @@ const ArticleList = () => {
   const { response, loading } = useSelector((state) => state.article)
 
   useEffect(() => {
-    dispatch(getArticle())
+    dispatch(getArticle({ limit: 20, offset: 0 }))
   }, [])
 
+  console.log(response)
   return (
     <div className="wrapper">
       {!loading ? (
         <div className="article-list__container">
-          {response.articles.map((item) => (
+          {/* {response.articles.map((item) => (
             <ArticleItem item={item} />
-          ))}
+          ))} */}
         </div>
       ) : (
         <LoadingComponent />
