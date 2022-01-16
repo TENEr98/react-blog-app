@@ -1,14 +1,13 @@
 import { useEffect } from 'react'
-import { Button, Form, Input, message } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import {
   getProfile,
   onChangeEditProfile,
   updateProfile
 } from '../../../store/authSlice'
-
 import './EditProfile.scss'
 
 const EditProfile = () => {
@@ -94,7 +93,7 @@ const EditProfile = () => {
                     message: 'Please input your New password!'
                   },
                   ({ getFieldValue }) => ({
-                    validator(_, value) {
+                    validator() {
                       if (
                         !getFieldValue('New password') ||
                         getFieldValue('New password').length < 6

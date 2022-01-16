@@ -1,12 +1,10 @@
 import React from 'react'
-
 import { Button, Form, Input, message } from 'antd'
-import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { loginUser, onChangeSignIn } from '../../../store/authSlice'
 import { LoadingComponent } from '../../Loading'
-
 import './SignIn.scss'
 
 const SignIn = () => {

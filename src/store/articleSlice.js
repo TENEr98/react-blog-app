@@ -4,7 +4,7 @@ import { ArticleAPI } from '../api'
 
 const initialState = {
   response: null,
-  loading: false,
+  loading: true,
   error: null
 }
 
@@ -18,7 +18,7 @@ const articleSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getArticle.pending]: (state, _) => {
+    [getArticle.pending]: (state) => {
       state.loading = true
     },
     [getArticle.fulfilled]: (state, { payload }) => {

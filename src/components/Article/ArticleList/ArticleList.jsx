@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
+import { Pagination } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { LoadingComponent } from '../../Loading'
-
-import { getArticle } from '../../../store/articleSlice'
 import { ArticleItem } from '..'
-
+import { getArticle } from '../../../store/articleSlice'
+import { LoadingComponent } from '../../Loading'
 import './ArticleList.scss'
 
 const ArticleList = () => {
@@ -18,14 +17,21 @@ const ArticleList = () => {
 
   return (
     <div className="wrapper">
-      {!loading ? (
-        <div className="article-list__container">
-          {response.articles.map((item) => (
-            <ArticleItem item={item} />
-          ))}
-        </div>
-      ) : (
+      {loading ? (
         <LoadingComponent />
+      ) : (
+        <div className="article-list__container">
+          {response.articles.map((item, idx) => (
+            <ArticleItem item={item} key={idx} />
+          ))}
+          <div className="article-pagination">
+            <Pagination
+              current={1}
+              total={response.articlesCount}
+              pageSize={10}
+            />
+          </div>
+        </div>
       )}
     </div>
   )

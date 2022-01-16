@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react'
-
+import { useEffect } from 'react'
 import { Button } from 'antd'
-import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 import userPhotoPlaceholder from '../../assets/img/userPhotoPlaceholder.png'
 import { onChangeLocalStorage } from '../../store/authSlice'
-
 import './Navbar.scss'
 
 const Navbar = () => {

@@ -91,14 +91,14 @@ const authSlice = createSlice({
     }
   },
   extraReducers: {
-    [createUser.pending]: (state, _) => {
+    [createUser.pending]: (state) => {
       state.loading = true
     },
     [createUser.fulfilled]: (state, { payload }) => {
       state.loading = false
       state.response = payload
     },
-    [loginUser.pending]: (state, _) => {
+    [loginUser.pending]: (state) => {
       state.loading = true
     },
     [loginUser.fulfilled]: (state, { payload }) => {
@@ -112,7 +112,7 @@ const authSlice = createSlice({
         state.isAuth = false
       }
     },
-    [getProfile.pending]: (state, _) => {
+    [getProfile.pending]: (state) => {
       state.loading = true
     },
     [getProfile.fulfilled]: (state, { payload }) => {
@@ -127,7 +127,7 @@ const authSlice = createSlice({
         avatarImg: user.image
       }
     },
-    [updateProfile.pending]: (state, _) => {
+    [updateProfile.pending]: (state) => {
       state.loading = true
     },
     [updateProfile.fulfilled]: (state, { payload }) => {

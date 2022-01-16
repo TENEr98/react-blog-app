@@ -1,12 +1,10 @@
 import React from 'react'
-
 import { Button, Checkbox, Divider, Form, Input, message } from 'antd'
-import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { createUser, onChangeSignUp } from '../../../store/authSlice'
 import { LoadingComponent } from '../../Loading'
-
 import './SignUp.scss'
 
 const SignUp = () => {
@@ -26,6 +24,7 @@ const SignUp = () => {
       email: signUpForm.email,
       password: signUpForm.password
     }
+
     dispatch(createUser(correctFormData))
       .unwrap()
       .then((response) => {
@@ -41,6 +40,7 @@ const SignUp = () => {
         }
       })
   }
+
   return (
     <div className="wrapper">
       <div className="sign-up__container">
@@ -108,7 +108,7 @@ const SignUp = () => {
                         message: 'Please input your Password!'
                       },
                       ({ getFieldValue }) => ({
-                        validator(_, value) {
+                        validator() {
                           if (getFieldValue('password').length < 6) {
                             return Promise.reject(
                               'Your password needs to be at least 6 characters.'

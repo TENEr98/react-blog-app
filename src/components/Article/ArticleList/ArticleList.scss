@@ -3,4 +3,8 @@
   max-width: 56rem;
   padding: 1.625rem;
   margin: auto;
+  .article-pagination {
+    display: flex;
+    justify-content: center;
+  }
 }
