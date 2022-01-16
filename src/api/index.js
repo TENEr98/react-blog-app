@@ -55,6 +55,7 @@ export const AuthAPI = {
 
 export const ArticleAPI = {
   getArticle(limit, offset) {
+    console.log({offset})
     return instance
       .get(`/articles?limit=${limit}&offset=${offset}`)
       .then((response) => response)
