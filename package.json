@@ -10,7 +10,7 @@
     "format": "prettier-eslint \"src/**/*.js\"",
     "lint": "eslint --cache \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --cache --fix \"src/**/*.{js,jsx,ts,tsx}\"",
-    "pre-commit": "yarn run prettier && yarn run lin:fix"
+    "pre-commit": "yarn run prettier-format && yarn run lint:fix"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
