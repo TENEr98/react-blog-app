@@ -15,7 +15,6 @@ const ArticleList = () => {
     dispatch(getArticle({ limit: 20, offset: 0 }))
   }, [])
 
-  console.log(response)
   return (
     <div className="wrapper">
       {loading ? (

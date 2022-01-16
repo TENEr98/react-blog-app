@@ -8,11 +8,13 @@ const initialState = {
   error: null
 }
 
-export const getArticle = createAsyncThunk('article/getArticle', async ({limit, offset}) => {
-  console.log(offset)
-  const response = await ArticleAPI.getArticle(limit, offset)
-  return response.data
-})
+export const getArticle = createAsyncThunk(
+  'article/getArticle',
+  async ({ limit, offset }) => {
+    const response = await ArticleAPI.getArticle(limit, offset)
+    return response.data
+  }
+)
 
 const articleSlice = createSlice({
   name: 'article',
