@@ -1,0 +1,14 @@
+.article-detail__container{
+  width: 100%;
+  max-width: 62rem;
+  margin: auto;
+  padding-top: 1.625rem;
+  height: auto;
+
+  .article-detail__content{
+    background-color: #fff;
+    .article-detail__desc{
+      padding: 0 1.25rem 18px 1.25rem ;
+    }
+  }
+}

@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 import { loginUser, onChangeSignIn } from '../../../store/authSlice'
-import { LoadingComponent } from '../../Loading'
+import { Loader } from '../../Loader'
 import './SignIn.scss'
 
 const SignIn = () => {
   const dispatch = useDispatch()
   const navigation = useNavigate()
+
   const { signInForm, loading } = useSelector((state) => state.auth)
 
   const [antForm] = Form.useForm()
@@ -27,7 +28,12 @@ const SignIn = () => {
             .success('You successfully signed in', 2)
             .then(() => navigation('/'))
         } else if (response.data) {
-          message.error(`${Object.entries(response.data.errors).join(' ')}`, 3)
+          message.error(
+            `${Object.entries(response.data.errors)
+              .join(' ')
+              .replace(',', ' ')}`,
+            3
+          )
         }
       })
   }
@@ -37,7 +43,7 @@ const SignIn = () => {
       <div className="sign-in__container">
         <div className="sign-in__content">
           {loading ? (
-            <LoadingComponent />
+            <Loader />
           ) : (
             <>
               <h3 className="sign-in__title">Sign In</h3>

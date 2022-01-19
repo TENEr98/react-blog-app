@@ -1,9 +1,37 @@
 import { HeartOutlined } from '@ant-design/icons/lib/icons'
+import { Button, message, Popconfirm } from 'antd'
 import { format } from 'date-fns'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { deleteArticle } from '../../../store/articleSlice'
 
 import './ArticleItem.scss'
 
 const ArticleItem = ({ item }) => {
+  const dispatch = useDispatch()
+  const { deleteItem } = useSelector((state) => state.article)
+
+  const navigation = useNavigate()
+
+  const { slug } = useParams()
+  const token = localStorage.getItem('t')
+
+  const confirm = async () => {
+    if (slug) {
+      await dispatch(deleteArticle(slug))
+      if (deleteItem.status === 200) {
+        message
+          .success('Article has been deleted', 2)
+          .then(() => navigation('/'))
+      } else {
+        message.error(deleteItem.data.message, 2)
+      }
+    } else {
+      message.error('Article is not found', 2)
+    }
+  }
+
   return (
     <div className="article-item__content">
       <div className="article-item__header">
@@ -46,6 +74,20 @@ const ArticleItem = ({ item }) => {
       </div>
       <div className="article-item__main">
         <p>{item.body}</p>
+        {token && slug && (
+          <div className="article-item__action_block">
+            <Popconfirm
+              placement="bottomLeft"
+              title="Are you sure to delete this article?"
+              onConfirm={confirm}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button danger>Delete</Button>
+            </Popconfirm>
+            <Button>Edit</Button>
+          </div>
+        )}
       </div>
     </div>
   )

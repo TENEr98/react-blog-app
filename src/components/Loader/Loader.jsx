@@ -1,8 +1,8 @@
 import { Spin } from 'antd'
 
-import './Loading.scss'
+import './Loader.scss'
 
-const LoadingComponent = () => {
+const Loader = () => {
   return (
     <div className="loading">
       <Spin size="large" />
@@ -10,4 +10,4 @@ const LoadingComponent = () => {
   )
 }
 
-export default LoadingComponent
+export default Loader

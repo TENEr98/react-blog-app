@@ -1,6 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-import { ArticleList } from './components/Article'
+import {
+  ArticleDetails,
+  ArticleList,
+  ArticleMutate
+} from './components/Article'
 import { EditProfile, SignIn, SignUp } from './components/Auth'
 import { Navbar } from './components/Navbar'
 
@@ -11,15 +15,15 @@ const App = () => {
     <Router>
       <Navbar />
       <Routes>
+        <Route index path="/" element={<ArticleList />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/edit-profile" element={<EditProfile />} />
-        <Route path="/" element={<ArticleList />}>
-          <Route path="article" element={<ArticleList />}>
-            <Route path="new" />
-            <Route path=":slug" />
-            <Route path=":slug/edit" />
-          </Route>
+        <Route path="/article">
+          <Route index element={<ArticleList />} />
+          <Route index={false} path="new" element={<ArticleMutate />} />
+          <Route index={false} path=":slug" element={<ArticleDetails />} />
+          <Route index={false} path=":slug/edit" />
         </Route>
       </Routes>
     </Router>

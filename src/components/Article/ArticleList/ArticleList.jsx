@@ -3,36 +3,34 @@ import { Pagination } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { ArticleItem } from '..'
-import { getArticle } from '../../../store/articleSlice'
-import { LoadingComponent } from '../../Loading'
+import { getArticleList } from '../../../store/articleSlice'
+import { Loader } from '../../Loader'
 import './ArticleList.scss'
 
 const ArticleList = () => {
   const dispatch = useDispatch()
-  const { response, loading } = useSelector((state) => state.article)
+  const { articleList } = useSelector((state) => state.article)
 
   useEffect(() => {
-    dispatch(getArticle({ limit: 20, offset: 0 }))
+    dispatch(getArticleList({ limit: 20, offset: 0 }))
   }, [])
+
+  if (!articleList) return <Loader />
 
   return (
     <div className="wrapper">
-      {loading ? (
-        <LoadingComponent />
-      ) : (
-        <div className="article-list__container">
-          {response.articles.map((item, idx) => (
-            <ArticleItem item={item} key={idx} />
-          ))}
-          <div className="article-pagination">
-            <Pagination
-              current={1}
-              total={response.articlesCount}
-              pageSize={10}
-            />
-          </div>
+      <div className="article-list__container">
+        {articleList.articles.map((item, idx) => (
+          <ArticleItem item={item} key={idx} />
+        ))}
+        <div className="article-pagination">
+          <Pagination
+            current={1}
+            total={articleList.articlesCount}
+            pageSize={20}
+          />
         </div>
-      )}
+      </div>
     </div>
   )
 }

@@ -106,7 +106,6 @@ const authSlice = createSlice({
       state.response = payload
       state.username = payload?.data?.user?.username
       if (payload.status === 200) {
-        console.log({ AUTH: state.isAuth })
         state.isAuth = true
       } else if (payload.isAuth !== 200) {
         state.isAuth = false

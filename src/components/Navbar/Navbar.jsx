@@ -37,7 +37,7 @@ const Navbar = () => {
         {isAuth ? (
           <>
             <NavLink
-              to="/new-article"
+              to="/article/new"
               className="header__action green"
               component={Button}
             >

@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 import { createUser, onChangeSignUp } from '../../../store/authSlice'
-import { LoadingComponent } from '../../Loading'
+import { Loader } from '../../Loader'
 import './SignUp.scss'
 
 const SignUp = () => {
   const dispatch = useDispatch()
   const navigation = useNavigate()
+
   const { signUpForm, loading } = useSelector((state) => state.auth)
 
   const [antForm] = Form.useForm()
@@ -36,7 +37,12 @@ const SignUp = () => {
             )
             .then(() => navigation('/sign-in'))
         } else {
-          message.error(`${Object.entries(response.data.errors).join(' ')}`, 3)
+          message.error(
+            `${Object.entries(response.data.errors)
+              .join(' ')
+              .replace(',', ' ')}`,
+            3
+          )
         }
       })
   }
@@ -46,7 +52,7 @@ const SignUp = () => {
       <div className="sign-up__container">
         <div className="sign-up__content">
           {loading ? (
-            <LoadingComponent />
+            <Loader />
           ) : (
             <>
               <h3 className="sign-up__title">Create new account</h3>

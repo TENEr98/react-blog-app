@@ -54,9 +54,33 @@ export const AuthAPI = {
 }
 
 export const ArticleAPI = {
-  getArticle(limit, offset) {
+  getArticleList(limit, offset) {
     return instance
       .get(`/articles?limit=${limit}&offset=${offset}`)
+      .then((response) => response)
+      .catch((err) => err.response)
+  },
+  getArticle(slug) {
+    return instance
+      .get(`/articles/${slug}`)
+      .then((response) => response)
+      .catch((err) => err.response)
+  },
+  createArticle(articleForm) {
+    return instance
+      .post('/articles', articleForm)
+      .then((response) => response)
+      .catch((err) => err.response)
+  },
+  editArticle(slug, articleForm) {
+    return instance
+      .put(`/articles/${slug}`, articleForm)
+      .then((response) => response)
+      .catch((err) => err.response)
+  },
+  deleteArticle(slug) {
+    return instance
+      .delete(`/articles/${slug}`)
       .then((response) => response)
       .catch((err) => err.response)
   }

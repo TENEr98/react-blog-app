@@ -76,6 +76,7 @@
       }
       .article-item__profile_img_block {
         .article-item__profile_img {
+          cursor: pointer;
           width: 2.875rem;
           height: 2.875rem;
           border-radius: 50px;
@@ -83,6 +84,20 @@
       }
     }
   }
-  .article-item__main {
+  .article-item__main{
+    display: flex;
+    justify-content: space-between;
+    .article-item__action_block{
+      >:first-child{
+        margin-right: 0.75rem;
+      }
+      >:last-child{
+        border: 0.0625rem #52C41A solid;
+        color: #52C41A;
+      }
+      .ant-btn{
+        border-radius: 0.3125rem;
+      }
+    }
   }
 }
