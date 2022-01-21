@@ -83,5 +83,17 @@ export const ArticleAPI = {
       .delete(`/articles/${slug}`)
       .then((response) => response)
       .catch((err) => err.response)
+  },
+  createLike(slug) {
+    return instance
+      .post(`/articles/${slug}/favorite`)
+      .then((response) => response)
+      .catch((err) => err.response)
+  },
+  deleteLike(slug) {
+    return instance
+      .delete(`/articles/${slug}/favorite`)
+      .then((response) => response)
+      .catch((err) => err.response)
   }
 }

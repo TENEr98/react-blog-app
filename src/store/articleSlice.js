@@ -43,10 +43,36 @@ export const createArticle = createAsyncThunk(
   }
 )
 
+export const editArticle = createAsyncThunk(
+  'article/editArticle',
+  async ({ slug, articleData }) => {
+    const response = await ArticleAPI.editArticle(slug, {
+      article: { ...articleData }
+    })
+    return response
+  }
+)
+
 export const deleteArticle = createAsyncThunk(
   'article/deleteArticle',
   async (slug) => {
     const response = await ArticleAPI.deleteArticle(slug)
+    return response
+  }
+)
+
+export const createLikeArticle = createAsyncThunk(
+  'article/createLikeArticle',
+  async (slug) => {
+    const response = await ArticleAPI.createLike(slug)
+    return response
+  }
+)
+
+export const deleteLikeArticle = createAsyncThunk(
+  'article/deleteLikeArticle',
+  async (slug) => {
+    const response = await ArticleAPI.deleteLike(slug)
     return response
   }
 )
@@ -86,6 +112,12 @@ const articleSlice = createSlice({
     [getArticle.fulfilled]: (state, { payload }) => {
       state.loading = false
       state.articleItem = payload
+      state.articleForm = {
+        title: payload.article.title,
+        description: payload.article.description,
+        body: payload.article.body,
+        tagList: payload.article.tagList
+      }
     },
     [deleteArticle.pending]: (state) => {
       state.loading = true
@@ -100,6 +132,34 @@ const articleSlice = createSlice({
     [createArticle.fulfilled]: (state, { payload }) => {
       state.loading = false
       state.response = payload
+    },
+    [editArticle.pending]: (state) => {
+      state.loading = true
+    },
+    [editArticle.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      state.response = payload
+    },
+    [createLikeArticle.pending]: (state) => {
+      state.loading = true
+    },
+    [createLikeArticle.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      const idx = state.articleList.articles.findIndex(
+        (item) => item.title === payload.data.article.title
+      )
+      state.articleList.articles[idx] = payload.data.article
+    },
+    [deleteLikeArticle.pending]: (state) => {
+      state.loading = true
+    },
+    [deleteLikeArticle.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      console.log({ item: payload.data.article })
+      const idx = state.articleList.articles.findIndex(
+        (item) => item.title === payload.data.article.title
+      )
+      state.articleList.articles[idx] = payload.data.article
     }
   }
 })

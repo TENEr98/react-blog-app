@@ -22,7 +22,7 @@
   "rules": {
     "indent": ["error", 2],
     "prettier/prettier": "error",
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": [0, "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
     "react/react-in-jsx-scope": "off",

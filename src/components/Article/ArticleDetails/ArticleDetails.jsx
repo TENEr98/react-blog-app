@@ -29,12 +29,20 @@ const ArticleDetails = () => {
         {loading ? (
           <Loader />
         ) : (
-          <div className="article-detail__content">
-            <ArticleItem item={articleItem.article} />
-            <div className="article-detail__desc">
-              {articleItem.article.description}
-            </div>
-          </div>
+          <>
+            {articleItem.article.title ? (
+              <div className="article-detail__content">
+                <ArticleItem item={articleItem.article} />
+                <div className="article-detail__desc">
+                  {articleItem.article.description}
+                </div>
+              </div>
+            ) : (
+              <div className="article-detail__deleted">
+                This post has been deleted
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

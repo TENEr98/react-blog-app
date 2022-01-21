@@ -18,7 +18,14 @@ const EditProfile = () => {
   )
 
   useEffect(() => {
-    dispatch(getProfile()).unwrap()
+    ;(async () => {
+      const response = await dispatch(getProfile()).unwrap()
+      antForm.setFieldsValue({
+        username: response.data.user.username,
+        email: response.data.user.email,
+        avatarImg: response.data.user.image
+      })
+    })()
   }, [])
 
   const onChangeForm = (event) => {
@@ -42,7 +49,12 @@ const EditProfile = () => {
         <div className="profile__container">
           <div className="profile__content">
             <h3 className="profile__title">Edit Profile</h3>
-            <Form layout="vertical" form={antForm} onFinish={onSubmit}>
+            <Form
+              layout="vertical"
+              form={antForm}
+              onFinish={onSubmit}
+              initialValues={editProfileForm}
+            >
               <Form.Item
                 label="Username"
                 name="username"

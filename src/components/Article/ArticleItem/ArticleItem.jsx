@@ -1,16 +1,15 @@
-import { HeartOutlined } from '@ant-design/icons/lib/icons'
+import { HeartFilled, HeartOutlined } from '@ant-design/icons/lib/icons'
 import { Button, message, Popconfirm } from 'antd'
 import { format } from 'date-fns'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 
-import { deleteArticle } from '../../../store/articleSlice'
+import { createLikeArticle, deleteArticle } from '../../../store/articleSlice'
 
 import './ArticleItem.scss'
 
 const ArticleItem = ({ item }) => {
   const dispatch = useDispatch()
-  const { deleteItem } = useSelector((state) => state.article)
 
   const navigation = useNavigate()
 
@@ -21,7 +20,7 @@ const ArticleItem = ({ item }) => {
     if (slug) {
       const response = await dispatch(deleteArticle(slug)).unwrap()
 
-      if (response.status === 200) {
+      if (response.status === 204) {
         message
           .success('Article has been deleted', 2)
           .then(() => navigation('/'))
@@ -33,6 +32,10 @@ const ArticleItem = ({ item }) => {
     }
   }
 
+  const onLike = async (slug) => {
+    await dispatch(createLikeArticle(slug))
+  }
+
   return (
     <div className="article-item__content">
       <div className="article-item__header">
@@ -42,7 +45,13 @@ const ArticleItem = ({ item }) => {
               {item.title}
             </a>
             <div className="article-item__title_like_block">
-              <HeartOutlined />
+              <div onClick={() => onLike(item.slug)}>
+                {item?.favorityBy?.length > 0 ? (
+                  <HeartFilled style={{ color: '#FF0707' }} />
+                ) : (
+                  <HeartOutlined />
+                )}
+              </div>
               <span>{item.favoritesCount}</span>
             </div>
           </div>

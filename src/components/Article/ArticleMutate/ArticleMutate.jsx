@@ -6,6 +6,8 @@ import { Link, useParams } from 'react-router-dom'
 
 import {
   createArticle,
+  editArticle,
+  getArticle,
   onAddArticleTag,
   onChangeArticleForm,
   onChangeArticleTagList,
@@ -16,15 +18,22 @@ import './ArticleMutate.scss'
 
 const ArticleMutate = () => {
   const dispatch = useDispatch()
-  const { slug } = useParams()
-
-  useEffect(() => {
-    slug
-  }, [])
-
   const { articleForm } = useSelector((state) => state.article)
 
+  const { slug } = useParams()
   const [antForm] = Form.useForm()
+
+  useEffect(() => {
+    ;(async () => {
+      const response = await dispatch(getArticle(slug)).unwrap()
+      antForm.setFieldsValue({
+        title: response.article.title,
+        description: response.article.description,
+        body: response.article.body,
+        tagList: response.article.tagList
+      })
+    })()
+  }, [slug])
 
   const onChangeForm = (event) => {
     dispatch(onChangeArticleForm(event))
@@ -45,16 +54,32 @@ const ArticleMutate = () => {
   }
 
   const onSubmit = async () => {
-    const response = await dispatch(createArticle(articleForm))
-    if (response.payload.status === 200) {
-      message.success('Article has been created', 2)
-    } else {
-      message.error(
-        `${Object.entries(response.payload.data.errors)
-          .join(' ')
-          .replace(',', ' ')}`,
-        2
+    if (slug) {
+      const editArticleResponse = await dispatch(
+        editArticle({ slug, articleForm })
       )
+      if (editArticleResponse.payload.status === 200) {
+        message.success('Article has been edited', 2)
+      } else {
+        message.error(
+          `${Object.entries(editArticleResponse.payload.data.errors)
+            .join(' ')
+            .replace(',', ' ')}`,
+          2
+        )
+      }
+    } else {
+      const response = await dispatch(createArticle(articleForm))
+      if (response.payload.status === 200) {
+        message.success('Article has been created', 2)
+      } else {
+        message.error(
+          `${Object.entries(response.payload.data.errors)
+            .join(' ')
+            .replace(',', ' ')}`,
+          2
+        )
+      }
     }
   }
 
@@ -75,6 +100,7 @@ const ArticleMutate = () => {
               layout="vertical"
               form={antForm}
               onFinish={onSubmit}
+              initialValues={articleForm}
               scrollToFirstError={{
                 block: 'center'
               }}
@@ -132,7 +158,7 @@ const ArticleMutate = () => {
                   rows={6}
                 />
               </Form.Item>
-              <Form.List name="tags">
+              <Form.List name="tag">
                 {(fields, { add, remove }) => (
                   <div className="article-mutate__tag_list_block">
                     {fields.map((field, index) => (
@@ -141,7 +167,7 @@ const ArticleMutate = () => {
                         key={field.key}
                       >
                         <Form.Item
-                          label={index === 0 && 'Tags'}
+                          label={index === 0 && 'tagList'}
                           required={false}
                         >
                           <div className="article-mutate__tag_block">
