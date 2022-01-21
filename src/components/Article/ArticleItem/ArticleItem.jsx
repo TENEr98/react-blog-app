@@ -2,7 +2,7 @@ import { HeartOutlined } from '@ant-design/icons/lib/icons'
 import { Button, message, Popconfirm } from 'antd'
 import { format } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 
 import { deleteArticle } from '../../../store/articleSlice'
 
@@ -19,13 +19,14 @@ const ArticleItem = ({ item }) => {
 
   const confirm = async () => {
     if (slug) {
-      await dispatch(deleteArticle(slug))
-      if (deleteItem.status === 200) {
+      const response = await dispatch(deleteArticle(slug)).unwrap()
+
+      if (response.status === 200) {
         message
           .success('Article has been deleted', 2)
           .then(() => navigation('/'))
       } else {
-        message.error(deleteItem.data.message, 2)
+        message.error(response.data.message, 2)
       }
     } else {
       message.error('Article is not found', 2)
@@ -85,7 +86,9 @@ const ArticleItem = ({ item }) => {
             >
               <Button danger>Delete</Button>
             </Popconfirm>
-            <Button>Edit</Button>
+            <NavLink className="ant-btn" to={`/article/${slug}/edit`}>
+              Edit
+            </NavLink>
           </div>
         )}
       </div>

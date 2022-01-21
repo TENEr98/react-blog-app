@@ -23,7 +23,7 @@ const App = () => {
           <Route index element={<ArticleList />} />
           <Route index={false} path="new" element={<ArticleMutate />} />
           <Route index={false} path=":slug" element={<ArticleDetails />} />
-          <Route index={false} path=":slug/edit" />
+          <Route index={false} path=":slug/edit" element={<ArticleMutate />} />
         </Route>
       </Routes>
     </Router>

@@ -11,6 +11,7 @@ const initialState = {
   },
   articleList: null,
   articleItem: null,
+  response: null,
   deleteItem: null,
   loading: true,
   error: null
@@ -32,6 +33,16 @@ export const getArticle = createAsyncThunk(
   }
 )
 
+export const createArticle = createAsyncThunk(
+  'article/createArticle',
+  async (articleData) => {
+    const response = await ArticleAPI.createArticle({
+      article: { ...articleData }
+    })
+    return response
+  }
+)
+
 export const deleteArticle = createAsyncThunk(
   'article/deleteArticle',
   async (slug) => {
@@ -49,6 +60,16 @@ const articleSlice = createSlice({
         target: { value, name }
       } = payload
       state.articleForm[name] = value
+    },
+    onChangeArticleTagList: (state, { payload }) => {
+      const { idx, event } = payload
+      state.articleForm.tagList[idx] = event.target.value
+    },
+    onAddArticleTag: (state, { payload }) => {
+      state.articleForm.tagList.push(payload)
+    },
+    onRemoveArticleTag: (state, { payload }) => {
+      state.articleForm.tagList.splice(payload, 1)
     }
   },
   extraReducers: {
@@ -72,10 +93,22 @@ const articleSlice = createSlice({
     [deleteArticle.fulfilled]: (state, { payload }) => {
       state.loading = false
       state.deleteItem = payload
+    },
+    [createArticle.pending]: (state) => {
+      state.loading = true
+    },
+    [createArticle.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      state.response = payload
     }
   }
 })
 
-export const { onChangeArticleForm } = articleSlice.actions
+export const {
+  onChangeArticleForm,
+  onChangeArticleTagList,
+  onAddArticleTag,
+  onRemoveArticleTag
+} = articleSlice.actions
 
 export default articleSlice.reducer

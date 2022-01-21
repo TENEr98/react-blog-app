@@ -1,20 +1,61 @@
 import { ArrowLeftOutlined } from '@ant-design/icons/lib/icons'
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, message } from 'antd'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-import { onChangeArticleForm } from '../../../store/articleSlice'
+import {
+  createArticle,
+  onAddArticleTag,
+  onChangeArticleForm,
+  onChangeArticleTagList,
+  onRemoveArticleTag
+} from '../../../store/articleSlice'
 
 import './ArticleMutate.scss'
 
 const ArticleMutate = () => {
   const dispatch = useDispatch()
+  const { slug } = useParams()
+
+  useEffect(() => {
+    slug
+  }, [])
+
   const { articleForm } = useSelector((state) => state.article)
 
   const [antForm] = Form.useForm()
 
   const onChangeForm = (event) => {
     dispatch(onChangeArticleForm(event))
+  }
+
+  const onChangeTag = (idx, event) => {
+    dispatch(onChangeArticleTagList({ idx, event }))
+  }
+
+  const onAddTag = (addFn) => {
+    addFn()
+    dispatch(onAddArticleTag(''))
+  }
+
+  const onRemoveTag = (removeFn, fieldName, idx) => {
+    removeFn(fieldName)
+    dispatch(onRemoveArticleTag(idx))
+  }
+
+  const onSubmit = async () => {
+    const response = await dispatch(createArticle(articleForm))
+    if (response.payload.status === 200) {
+      message.success('Article has been created', 2)
+    } else {
+      message.error(
+        `${Object.entries(response.payload.data.errors)
+          .join(' ')
+          .replace(',', ' ')}`,
+        2
+      )
+    }
   }
 
   return (
@@ -33,6 +74,7 @@ const ArticleMutate = () => {
             <Form
               layout="vertical"
               form={antForm}
+              onFinish={onSubmit}
               scrollToFirstError={{
                 block: 'center'
               }}
@@ -99,28 +141,35 @@ const ArticleMutate = () => {
                         key={field.key}
                       >
                         <Form.Item
-                          label={index === 0 ? 'Tags' : ''}
+                          label={index === 0 && 'Tags'}
                           required={false}
                         >
                           <div className="article-mutate__tag_block">
                             <Form.Item {...field}>
-                              <Input placeholder="Tag" />
+                              <Input
+                                placeholder="Tag"
+                                name={index}
+                                value={articleForm[index]}
+                                onChange={(event) => onChangeTag(index, event)}
+                              />
                             </Form.Item>
-                            {fields.length >= 1 ? (
+                            {fields.length >= 1 && (
                               <Button
                                 className="article-mutate__action_delete"
                                 danger
-                                onClick={() => remove(field.name)}
+                                onClick={() =>
+                                  onRemoveTag(remove, field.name, index)
+                                }
                               >
                                 Delete
                               </Button>
-                            ) : null}
+                            )}
                           </div>
                         </Form.Item>
                       </div>
                     ))}
                     <Form.Item>
-                      <Button onClick={() => add()}>Add tag</Button>
+                      <Button onClick={() => onAddTag(add)}>Add tag</Button>
                     </Form.Item>
                   </div>
                 )}
