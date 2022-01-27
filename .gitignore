@@ -5,3 +5,4 @@ dist-ssr
 .eslintcache
 .husky
 *.local
+.vscode
