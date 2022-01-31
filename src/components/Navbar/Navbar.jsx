@@ -29,55 +29,57 @@ const Navbar = () => {
   }
 
   return (
-    <header className="header">
-      <NavLink to="/" className="header__title">
-        Realworld Blog
-      </NavLink>
-      <div className="header__actions">
-        {isAuth ? (
-          <>
-            <NavLink
-              to="/article/new"
-              className="header__action green"
-              component={Button}
-            >
-              Create article
-            </NavLink>
-            <div className="header__avatar">
-              <NavLink to="/edit-profile" component={Button}>
-                {username}
+    <header className="header__wrapper">
+      <div className="header">
+        <NavLink to="/" className="header__title">
+          Realworld Blog
+        </NavLink>
+        <div className="header__actions">
+          {isAuth ? (
+            <>
+              <NavLink
+                to="/article/new"
+                className="header__action green"
+                component={Button}
+              >
+                Create article
               </NavLink>
-              <div className="header__img">
-                <img src={userPhotoPlaceholder} />
+              <div className="header__avatar">
+                <NavLink to="/edit-profile" component={Button}>
+                  {username}
+                </NavLink>
+                <div className="header__img">
+                  <img src={userPhotoPlaceholder} />
+                </div>
               </div>
-            </div>
-            <NavLink
-              to="/"
-              className="header__action grey"
-              component={Button}
-              onClick={onClickLogOut}
-            >
-              Log Out
-            </NavLink>
-          </>
-        ) : (
-          <>
-            <NavLink
-              to="/sign-in"
-              component={Button}
-              className="header__action"
-            >
-              Sign In
-            </NavLink>
-            <NavLink
-              to="/sign-up"
-              component={Button}
-              className="header__action green"
-            >
-              Sign Up
-            </NavLink>
-          </>
-        )}
+              <NavLink
+                to="/"
+                className="header__action grey"
+                component={Button}
+                onClick={onClickLogOut}
+              >
+                Log Out
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/sign-in"
+                component={Button}
+                className="header__action"
+              >
+                Sign In
+              </NavLink>
+              <NavLink
+                to="/sign-up"
+                component={Button}
+                className="header__action green"
+              >
+                Sign Up
+              </NavLink>
+            </>
+          )}
+        </div>
       </div>
     </header>
   )

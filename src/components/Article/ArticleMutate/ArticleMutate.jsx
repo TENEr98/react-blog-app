@@ -24,6 +24,7 @@ const ArticleMutate = () => {
   const [antForm] = Form.useForm()
 
   useEffect(() => {
+    if (!slug) return
     ;(async () => {
       const response = await dispatch(getArticle(slug)).unwrap()
       antForm.setFieldsValue({

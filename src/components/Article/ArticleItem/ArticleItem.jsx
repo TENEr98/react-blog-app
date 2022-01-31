@@ -71,7 +71,7 @@ const ArticleItem = ({ item }) => {
         <div className="article-item__profile_block">
           <div className="article-item__profile_details">
             <h6>{item.author.username}</h6>
-            <span>{format(new Date(item.updatedAt), 'MMMM,dd,yyyy')}</span>
+            <span>{format(new Date(item.updatedAt), 'MMMM dd, yyyy')}</span>
           </div>
           <div className="article-item__profile_img_block">
             <img

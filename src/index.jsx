@@ -7,7 +7,7 @@ import store from './store'
 
 import 'antd/dist/antd.css'
 
-import './main.scss'
+import './index.scss'
 
 ReactDOM.render(
   <Provider store={store}>

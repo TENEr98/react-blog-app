@@ -1,49 +1,55 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 5rem;
-  padding: 1rem 1.375rem;
+.header__wrapper {
+  width: 100%;
+  max-width: 62rem;
+  margin: 0 auto;
 
-  .header__title {
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.85);
-    font-size: 1.125rem;
-    line-height: 28px;
-    text-decoration: none;
-  }
-
-  .header__actions {
+  .header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    column-gap: 1.6875rem;
+    height: 5rem;
+    padding: 1rem 1.375rem;
 
-    .header__action {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      border: none;
+    .header__title {
+      font-weight: 400;
       color: rgba(0, 0, 0, 0.85);
-      padding: 0.625rem 1.125rem !important;
-      vertical-align: middle;
-
-      &.green {
-        border-radius: 0.3125rem;
-        border: 1px solid #52c41a;
-        color: #52c41a;
-      }
-      &.grey {
-        border-radius: 0.3125rem;
-        border: 1px solid rgba(0, 0, 0, 0.75);
-        color: rgba(0, 0, 0, 0.75);
-      }
+      font-size: 1.125rem;
+      line-height: 28px;
+      text-decoration: none;
     }
-    .header__avatar {
+
+    .header__actions {
       display: flex;
-      justify-content: center;
       align-items: center;
-      .header__img {
-        margin-left: 0.8125rem;
+      column-gap: 1.6875rem;
+
+      .header__action {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        border: none;
+        color: rgba(0, 0, 0, 0.85);
+        padding: 0.625rem 1.125rem !important;
+        vertical-align: middle;
+
+        &.green {
+          border-radius: 0.3125rem;
+          border: 1px solid #52c41a;
+          color: #52c41a;
+        }
+        &.grey {
+          border-radius: 0.3125rem;
+          border: 1px solid rgba(0, 0, 0, 0.75);
+          color: rgba(0, 0, 0, 0.75);
+        }
+      }
+      .header__avatar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .header__img {
+          margin-left: 0.8125rem;
+        }
       }
     }
   }
